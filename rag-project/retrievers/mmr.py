@@ -2,6 +2,10 @@ from langchain_core.documents import Document
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
+# mmr usr kori bcoz by default similarity search use krle 3 ta jinish loss hoi 
+# 1/ context window loss
+# 2/ token usages
+# 3/ imformation diversity loss bcoz same jinish onk khane , 
 
 
 docs = [
@@ -28,6 +32,7 @@ print("\n===== Similarity Search Results =====\n")
 
 similarity_docs = similarity_retriever.invoke("What is gradient descent?")
 
+# aikhane similarity search ki korse chunk 1,2,3 serial dise same chunk multiple gele issue token cost 
 for doc in similarity_docs:
     print(doc.page_content)
 
@@ -41,5 +46,6 @@ print("\n===== MMR Results =====\n")
 
 mmr_docs = mmr_retriever.invoke("What is gradient descent?")
 
+# mmr dise 1,2,5 chunks
 for doc in mmr_docs:
     print(doc.page_content)
