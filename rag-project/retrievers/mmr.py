@@ -32,7 +32,7 @@ print("\n===== Similarity Search Results =====\n")
 
 similarity_docs = similarity_retriever.invoke("What is gradient descent?")
 
-# aikhane similarity search ki korse chunk 1,2,3 serial dise same chunk multiple gele issue token cost 
+# aikhane similarity search ki korse chunk 1,2,3 serial dise same chunk multiple gele issue token cost -- update
 for doc in similarity_docs:
     print(doc.page_content)
 
