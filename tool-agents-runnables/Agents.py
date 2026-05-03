@@ -74,6 +74,11 @@ def get_news(city:str) -> str:
 
 llm = ChatMistralAI(model="mistral-small-2506")
 
+# ******************************************* Work Process *********************
+
+# create agent with custom tool , handling tool calling login using langchain and automate the workflow 1st then add human in tha loop as a middleware 
+# 
+# ********************************************************
 
 # create agent using langchain and automate the flow -- there are no human in the loop concept 
 agent = create_agent(

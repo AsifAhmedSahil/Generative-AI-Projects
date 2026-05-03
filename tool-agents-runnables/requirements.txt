@@ -4,3 +4,5 @@ langchain-openai
 python-dotenv
 langchain-mistralai
 langchain-community
+
+streamlit
