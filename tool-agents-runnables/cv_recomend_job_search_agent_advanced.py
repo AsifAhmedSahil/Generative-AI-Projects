@@ -158,7 +158,7 @@ Explain only which CV type fits best (Full Stack / Backend / Python etc.)
         selected_cv_type = selection.content
 
         st.info(f"AI Selected CV: {selected_cv_type}")
-# update
+
         # ====================================================
         # 📄 STEP 7: RETRIEVE CV
         # ====================================================
