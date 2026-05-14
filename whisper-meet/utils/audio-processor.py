@@ -5,6 +5,7 @@ import os
 DOWNLOAD_DIR = 'downloads'
 os.makedirs(DOWNLOAD_DIR,exist_ok = True)
 
+# this function is for extract audio from youtube video
 def download_youtube_audio(url :str) ->str:
     output_path = os.path.join(DOWNLOAD_DIR, "%(title)s.%(ext)s")
     ydl_opts = {
@@ -26,7 +27,7 @@ def download_youtube_audio(url :str) ->str:
 
 data = download_youtube_audio("https://www.youtube.com/watch?v=ipC7z_0GBHY&t=59s")
 
-
+# this function is for convert the extracting yt video to 16kHz wav format
 def convert_to_wav(input_path: str) -> str:
     """Convert any audio/video file to WAV format using pydub."""
     output_path = os.path.splitext(input_path)[0] + "_converted.wav"
@@ -35,4 +36,22 @@ def convert_to_wav(input_path: str) -> str:
     audio.export(output_path, format="wav")
     return output_path
 
-print(convert_to_wav(data))
+data_final = convert_to_wav(data)
+
+# chunking the large file for wishper ai 
+def chunk_audio(wav_path:str,chunk_minutes:int = 10) -> list:
+    audio = AudioSegment.from_wav(wav_path)
+    chunk_ms = chunk_minutes * 60 * 1000
+
+    chunks = []
+
+    for i,start in enumerate(range(0,len(audio),chunk_ms)):
+        chunk = audio[start:start + chunk_ms]
+        chunk_path = f"{wav_path}_chunk_{i}.wav"
+        chunk.export(chunk_path,format="wav")
+
+        chunks.append(chunk_path)
+
+    return chunks
+
+print(chunk_audio(data_final))
